@@ -1,0 +1,15 @@
+sudo: required
+service:
+ - docker
+before_install:
+  - docker build -t jayabalandevops/docker-vijay:3.0 .
+script:
+ - echo "$docker_password" | docker login -u "$docker_username" --password-stdin
+ - docker images # to verify image is build or not
+ - docker push jayabalandevops/docker-vijay:3.0
+notifications:
+ email:
+   recipients:
+     - balaniaf@gmail.com
+   on_success: always
+   on_failure: always
